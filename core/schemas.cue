@@ -87,8 +87,7 @@ cat: #RenovateConfig & bestPracticesBase & {
 		ruleBlocks.mergeCommit &
 		ruleBlocks.noTests &
 		ruleBlocks.allDeps & {
-			rangeStrategy:    "pin"
-			matchUpdateTypes: updateTypes.standard
+			rangeStrategy: "pin"
 		},
 	]
 }
@@ -97,9 +96,7 @@ dog: #RenovateConfig & bestPracticesBase & commonPatterns.withGoPost & {
 	packageRules: [
 		ruleBlocks.automerge &
 		ruleBlocks.mergeCommit &
-		ruleBlocks.recreate & {
-			matchUpdateTypes: updateTypes.standard
-		},
+		ruleBlocks.recreate & {},
 	]
 }
 
@@ -107,9 +104,7 @@ owl: #RenovateConfig & bestPracticesBase & commonPatterns.withGoPost & {
 	packageRules: [
 		ruleBlocks.automerge &
 		ruleBlocks.mergeCommit &
-		ruleBlocks.recreate & {
-			matchUpdateTypes: updateTypes.withReplacement
-		},
+		ruleBlocks.recreate & {},
 	]
 	ignorePaths: ["**/testdata/go.mod"]
 }
@@ -120,9 +115,7 @@ monkey: #RenovateConfig & bestPracticesBase & commonPatterns.withGoPost & {
 		ruleBlocks.automerge &
 		ruleBlocks.mergeCommit &
 		ruleBlocks.noTests &
-		ruleBlocks.allDeps & {
-			matchUpdateTypes: updateTypes.withReplacement
-		},
+		ruleBlocks.allDeps & {},
 	]
 }
 
@@ -130,9 +123,7 @@ hamster: #RenovateConfig & recommendedBase & commonPatterns.withGoPost & {
 	packageRules: [
 		ruleBlocks.automerge &
 		ruleBlocks.mergeCommit &
-		ruleBlocks.allDeps & {
-			matchUpdateTypes: updateTypes.standard
-		},
+		ruleBlocks.allDeps & {},
 	]
 }
 
