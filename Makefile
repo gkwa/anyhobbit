@@ -64,6 +64,7 @@ tidy: .timestamps/.tidy.time
 fmt: .timestamps/.fmt.time
 .timestamps/.fmt.time: $(SRC)
 	gofumpt -extra -w $(SRC)
+	cue fmt --simplify --files core
 	@mkdir -p .timestamps
 	@touch $@
 
