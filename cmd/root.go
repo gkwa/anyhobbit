@@ -9,24 +9,49 @@ import (
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
 
+	"github.com/gkwa/anyhobbit/core"
 	"github.com/gkwa/anyhobbit/internal/logger"
 )
 
 var (
 	cfgFile   string
+	outFile   string
 	verbose   int
 	logFormat string
 	cliLogger logr.Logger
+
+	commands = map[string]struct {
+		short string
+		long  string
+	}{
+		"cat": {
+			short: "Generate Renovate configuration using cat preset",
+			long:  "Generate Renovate configuration using cat preset, which focuses on auto-merging standard updates with no automated testing.",
+		},
+		"dog": {
+			short: "Generate Renovate configuration using dog preset",
+			long:  "Generate Renovate configuration using dog preset, which auto-merges and recreates PRs for standard updates.",
+		},
+		"monkey": {
+			short: "Generate Renovate configuration using monkey preset",
+			long:  "Generate Renovate configuration using monkey preset, which auto-merges all updates including indirect dependencies.",
+		},
+		"owl": {
+			short: "Generate Renovate configuration using owl preset",
+			long:  "Generate Renovate configuration using owl preset, which auto-merges and recreates PRs for all update types including replacements.",
+		},
+		"hamster": {
+			short: "Generate Renovate configuration using hamster preset",
+			long:  "Generate Renovate configuration using hamster preset, which applies auto-merging to standard updates using recommended base config.",
+		},
+	}
 )
 
 var rootCmd = &cobra.Command{
 	Use:   "anyhobbit",
-	Short: "A brief description of your application",
-	Long:  `A longer description that spans multiple lines and likely contains examples and usage of using your application.`,
+	Short: "A tool for generating Renovate configs with various presets",
+	Long:  `A tool for generating Renovate configs with various presets for different update strategies.`,
 	PersistentPreRun: func(cmd *cobra.Command, args []string) {
-		// Initialize the console logger just before running
-		// a command only if one wasn't provided. This allows other
-		// callers (e.g. unit tests) to inject their own logger ahead of time.
 		if cliLogger.IsZero() {
 			cliLogger = logger.NewConsoleLogger(verbose, logFormat == "json")
 		}
@@ -34,6 +59,18 @@ var rootCmd = &cobra.Command{
 		ctx := logr.NewContext(context.Background(), cliLogger)
 		cmd.SetContext(ctx)
 	},
+}
+
+func createCommand(name, short, long string) {
+	cmd := &cobra.Command{
+		Use:   name,
+		Short: short,
+		Long:  long,
+		RunE: func(cmd *cobra.Command, args []string) error {
+			return core.GenerateConfig(name)
+		},
+	}
+	rootCmd.AddCommand(cmd)
 }
 
 func Execute() {
@@ -47,9 +84,14 @@ func init() {
 	cobra.OnInitialize(initConfig)
 
 	rootCmd.PersistentFlags().StringVar(&cfgFile, "config", "", "config file (default is $HOME/.anyhobbit.yaml)")
+	rootCmd.PersistentFlags().StringVarP(&outFile, "outfile", "o", ".renovaterc.json", "output file path")
 	rootCmd.PersistentFlags().CountVarP(&verbose, "verbose", "v", "increase verbosity")
 	rootCmd.PersistentFlags().StringVar(&logFormat, "log-format", "", "json or text (default is text)")
 
+	if err := viper.BindPFlag("outfile", rootCmd.PersistentFlags().Lookup("outfile")); err != nil {
+		fmt.Printf("Error binding outfile flag: %v\n", err)
+		os.Exit(1)
+	}
 	if err := viper.BindPFlag("verbose", rootCmd.PersistentFlags().Lookup("verbose")); err != nil {
 		fmt.Printf("Error binding verbose flag: %v\n", err)
 		os.Exit(1)
@@ -57,6 +99,11 @@ func init() {
 	if err := viper.BindPFlag("log-format", rootCmd.PersistentFlags().Lookup("log-format")); err != nil {
 		fmt.Printf("Error binding log-format flag: %v\n", err)
 		os.Exit(1)
+	}
+
+	// Add all commands from the map
+	for name, cmd := range commands {
+		createCommand(name, cmd.short, cmd.long)
 	}
 }
 
@@ -78,6 +125,7 @@ func initConfig() {
 		fmt.Fprintln(os.Stderr, "Using config file:", viper.ConfigFileUsed())
 	}
 
+	outFile = viper.GetString("outfile")
 	logFormat = viper.GetString("log-format")
 	verbose = viper.GetInt("verbose")
 }
