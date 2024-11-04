@@ -91,18 +91,17 @@ func TestCommandExecution(t *testing.T) {
 		notExpected    []string // strings that should not be present
 	}{
 		{
-			name:         "owl command creates config with replacements",
+			name:         "owl command creates config",
 			args:         []string{"owl", "-o", filepath.Join(tmpDir, "owl.json")},
 			expectedFile: filepath.Join(tmpDir, "owl.json"),
 			expectedInFile: []string{
 				"config:best-practices",
-				"matchUpdateTypes",
-				"replacement",
 				"recreateWhen",
 			},
 			notExpected: []string{
 				"config:recommended",
 				"indirect",
+				"replacement",
 			},
 		},
 		{
