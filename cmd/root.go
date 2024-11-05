@@ -18,6 +18,7 @@ var (
 	outFile   string
 	verbose   int
 	logFormat string
+	quiet     bool
 	cliLogger logr.Logger
 
 	commands = map[string]struct {
@@ -83,6 +84,7 @@ func init() {
 	rootCmd.PersistentFlags().StringVarP(&outFile, "outfile", "o", ".renovaterc.json", "output file path")
 	rootCmd.PersistentFlags().CountVarP(&verbose, "verbose", "v", "increase verbosity")
 	rootCmd.PersistentFlags().StringVar(&logFormat, "log-format", "", "json or text (default is text)")
+	rootCmd.PersistentFlags().BoolVarP(&quiet, "quiet", "q", false, "suppress output")
 
 	if err := viper.BindPFlag("outfile", rootCmd.PersistentFlags().Lookup("outfile")); err != nil {
 		fmt.Printf("Error binding outfile flag: %v\n", err)
@@ -94,6 +96,10 @@ func init() {
 	}
 	if err := viper.BindPFlag("log-format", rootCmd.PersistentFlags().Lookup("log-format")); err != nil {
 		fmt.Printf("Error binding log-format flag: %v\n", err)
+		os.Exit(1)
+	}
+	if err := viper.BindPFlag("quiet", rootCmd.PersistentFlags().Lookup("quiet")); err != nil {
+		fmt.Printf("Error binding quiet flag: %v\n", err)
 		os.Exit(1)
 	}
 
