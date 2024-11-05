@@ -90,7 +90,7 @@ owl: #RenovateConfig & bestPracticesBase & commonPatterns.withGoPost & {
 		ruleBlocks.automerge &
 		ruleBlocks.mergeCommit &
 		ruleBlocks.allDeps &
-		ruleBlocks.recreate & {},
+		ruleBlocks.recreate,
 	]
 	ignorePaths: ["**/testdata/go.mod"]
 }
@@ -101,7 +101,7 @@ monkey: #RenovateConfig & bestPracticesBase & commonPatterns.withGoPost & {
 		ruleBlocks.automerge &
 		ruleBlocks.mergeCommit &
 		ruleBlocks.noTests &
-		ruleBlocks.allDeps & {},
+		ruleBlocks.allDeps,
 	]
 }
 
@@ -109,7 +109,8 @@ hamster: #RenovateConfig & bestPracticesBase & commonPatterns.withGoPost & {
 	packageRules: [
 		ruleBlocks.automerge &
 		ruleBlocks.mergeCommit &
-		ruleBlocks.allDeps & {},
+		ruleBlocks.allDeps &
+		ruleBlocks.recreate,
 	]
 }
 
