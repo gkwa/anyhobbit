@@ -35,13 +35,6 @@ let bestPracticesBase = {
 	]
 }
 
-let recommendedBase = {
-	extends: [
-		"config:recommended",
-		":dependencyDashboard",
-	]
-}
-
 ruleBlocks: {
 	indirectDeps: #PackageRule & {
 		matchDepTypes: ["indirect"]
@@ -92,18 +85,11 @@ cat: #RenovateConfig & bestPracticesBase & {
 	]
 }
 
-dog: #RenovateConfig & bestPracticesBase & commonPatterns.withGoPost & {
-	packageRules: [
-		ruleBlocks.automerge &
-		ruleBlocks.mergeCommit &
-		ruleBlocks.recreate & {},
-	]
-}
-
 owl: #RenovateConfig & bestPracticesBase & commonPatterns.withGoPost & {
 	packageRules: [
 		ruleBlocks.automerge &
 		ruleBlocks.mergeCommit &
+		ruleBlocks.allDeps &
 		ruleBlocks.recreate & {},
 	]
 	ignorePaths: ["**/testdata/go.mod"]
@@ -119,7 +105,7 @@ monkey: #RenovateConfig & bestPracticesBase & commonPatterns.withGoPost & {
 	]
 }
 
-hamster: #RenovateConfig & recommendedBase & commonPatterns.withGoPost & {
+hamster: #RenovateConfig & bestPracticesBase & commonPatterns.withGoPost & {
 	packageRules: [
 		ruleBlocks.automerge &
 		ruleBlocks.mergeCommit &

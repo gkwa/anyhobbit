@@ -28,10 +28,6 @@ var (
 			short: "Generate Renovate configuration using cat preset",
 			long:  "Generate Renovate configuration using cat preset, which focuses on auto-merging standard updates with no automated testing.",
 		},
-		"dog": {
-			short: "Generate Renovate configuration using dog preset",
-			long:  "Generate Renovate configuration using dog preset, which auto-merges and recreates PRs for standard updates.",
-		},
 		"monkey": {
 			short: "Generate Renovate configuration using monkey preset",
 			long:  "Generate Renovate configuration using monkey preset, which auto-merges all updates including indirect dependencies.",
