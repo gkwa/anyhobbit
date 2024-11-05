@@ -35,27 +35,22 @@ let bestPracticesBase = {
 	]
 }
 
+let commonRuleFields = {
+	matchDepTypes: ["*"]
+	automerge:         true
+	automergeStrategy: "merge-commit"
+	recreateWhen:      "always"
+}
+
 ruleBlocks: {
 	indirectDeps: #PackageRule & {
 		matchDepTypes: ["indirect"]
 		enabled: true
 		matchManagers: ["gomod"]
 	}
-	automerge: #PackageRule & {
-		automerge: true
-	}
-	mergeCommit: #PackageRule & {
-		automergeStrategy: "merge-commit"
-	}
-	noTests: #PackageRule & {
+	noTests: #PackageRule & commonRuleFields & {
 		ignoreTests:   true
 		automergeType: "branch"
-	}
-	allDeps: #PackageRule & {
-		matchDepTypes: ["*"]
-	}
-	recreate: #PackageRule & {
-		recreateWhen: "always"
 	}
 }
 
@@ -76,49 +71,28 @@ let commonPatterns = {
 
 cat: #RenovateConfig & bestPracticesBase & {
 	packageRules: [
-		ruleBlocks.automerge &
-		ruleBlocks.mergeCommit &
-		ruleBlocks.noTests &
-		ruleBlocks.allDeps & {
+		ruleBlocks.noTests & {
 			rangeStrategy: "pin"
 		},
 	]
 }
 
 owl: #RenovateConfig & bestPracticesBase & commonPatterns.withGoPost & {
-	packageRules: [
-		ruleBlocks.automerge &
-		ruleBlocks.mergeCommit &
-		ruleBlocks.allDeps &
-		ruleBlocks.recreate,
-	]
+	packageRules: [commonRuleFields]
 	ignorePaths: ["**/testdata/go.mod"]
 }
 
 monkey: #RenovateConfig & bestPracticesBase & commonPatterns.withGoPost & {
 	packageRules: [
 		ruleBlocks.indirectDeps,
-		ruleBlocks.automerge &
-		ruleBlocks.mergeCommit &
-		ruleBlocks.noTests &
-		ruleBlocks.allDeps,
+		commonRuleFields & ruleBlocks.noTests,
 	]
 }
 
 hamster: #RenovateConfig & bestPracticesBase & commonPatterns.withGoPost & {
-	packageRules: [
-		ruleBlocks.automerge &
-		ruleBlocks.mergeCommit &
-		ruleBlocks.allDeps &
-		ruleBlocks.recreate,
-	]
+	packageRules: [commonRuleFields]
 }
 
 rabbit: #RenovateConfig & bestPracticesBase & commonPatterns.withGoPost & {
-	packageRules: [
-		ruleBlocks.automerge &
-		ruleBlocks.mergeCommit &
-		ruleBlocks.allDeps &
-		ruleBlocks.recreate,
-	]
+	packageRules: [commonRuleFields]
 }
