@@ -89,10 +89,6 @@ monkey: #RenovateConfig & bestPracticesBase & commonPatterns.withGoPost & {
 	]
 }
 
-hamster: #RenovateConfig & bestPracticesBase & commonPatterns.withGoPost & {
-	packageRules: [commonRuleFields]
-}
-
 rabbit: #RenovateConfig & bestPracticesBase & commonPatterns.withGoPost & {
 	packageRules: [commonRuleFields]
 }

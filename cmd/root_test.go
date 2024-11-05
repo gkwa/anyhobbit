@@ -115,18 +115,6 @@ func TestCommandExecution(t *testing.T) {
 			},
 		},
 		{
-			name:         "hamster command uses recommended base",
-			args:         []string{"hamster", "-o", filepath.Join(tmpDir, "hamster.json")},
-			expectedFile: filepath.Join(tmpDir, "hamster.json"),
-			expectedInFile: []string{
-				"gomodTidyE",
-			},
-			notExpected: []string{
-				"config:recommended",
-				"replacement",
-			},
-		},
-		{
 			name:         "default output file",
 			args:         []string{"cat", "-o", filepath.Join(tmpDir, "default.json")},
 			expectedFile: filepath.Join(tmpDir, "default.json"),

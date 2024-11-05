@@ -36,10 +36,6 @@ var (
 			short: "Generate Renovate configuration using owl preset",
 			long:  "Generate Renovate configuration using owl preset, which auto-merges and recreates PRs for all update types including replacements.",
 		},
-		"hamster": {
-			short: "Generate Renovate configuration using hamster preset",
-			long:  "Generate Renovate configuration using hamster preset, which applies auto-merging to standard updates using recommended base config.",
-		},
 		"rabbit": {
 			short: "Generate Renovate configuration using rabbit preset",
 			long:  "Generate Renovate configuration using rabbit preset, which auto-merges all dependency types and recreates PRs without filtering update types.",
