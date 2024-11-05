@@ -24,9 +24,9 @@ var (
 		short string
 		long  string
 	}{
-		"cat": {
-			short: "Generate Renovate configuration using cat preset",
-			long:  "Generate Renovate configuration using cat preset, which focuses on auto-merging standard updates with no automated testing.",
+		"rat": {
+			short: "Generate Renovate configuration using rat preset",
+			long:  "Generate Renovate configuration using rat preset, which focuses on auto-merging standard updates with no automated testing.",
 		},
 		"monkey": {
 			short: "Generate Renovate configuration using monkey preset",

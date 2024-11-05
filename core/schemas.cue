@@ -69,7 +69,7 @@ let commonPatterns = {
 	withGoPost: postUpdateOptions: goPostUpdateOptions
 }
 
-cat: #RenovateConfig & bestPracticesBase & {
+rat: #RenovateConfig & bestPracticesBase & {
 	packageRules: [
 		ruleBlocks.noTests & {
 			rangeStrategy: "pin"

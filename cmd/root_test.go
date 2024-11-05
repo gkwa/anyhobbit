@@ -116,7 +116,7 @@ func TestCommandExecution(t *testing.T) {
 		},
 		{
 			name:         "default output file",
-			args:         []string{"cat", "-o", filepath.Join(tmpDir, "default.json")},
+			args:         []string{"rat", "-o", filepath.Join(tmpDir, "default.json")},
 			expectedFile: filepath.Join(tmpDir, "default.json"),
 			expectedInFile: []string{
 				"rangeStrategy",

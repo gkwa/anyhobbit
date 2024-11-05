@@ -22,7 +22,7 @@ anyhobbit --help
 Generate config with specific preset:
 ```bash
 anyhobbit owl    # Aggressive updates including replacements
-anyhobbit cat    # Auto-merge standard updates, no tests
+anyhobbit rat    # Auto-merge standard updates, no tests
 anyhobbit dog    # Auto-merge and recreate PRs for standard updates
 anyhobbit monkey # Auto-merge all updates including indirect deps
 anyhobbit hamster # Auto-merge standard updates with recommended base
@@ -39,7 +39,7 @@ Default output is `.renovaterc.json` in current directory.
 ## Preset Strategies
 
 - **owl**: Most aggressive. Auto-merges all updates including replacements, recreates PRs when needed
-- **cat**: Auto-merges standard updates without running tests
+- **rat**: Auto-merges standard updates without running tests
 - **dog**: Auto-merges standard updates with PR recreation
 - **monkey**: Auto-merges all updates including indirect dependencies
 - **hamster**: Conservative auto-merging of standard updates using recommended base config
