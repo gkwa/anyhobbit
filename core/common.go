@@ -84,7 +84,7 @@ func GenerateConfig(configName string) error {
 
 	if !viper.GetBool("quiet") {
 		fmt.Printf("Generated %s using %s preset\n", outFile, configName)
-		fmt.Println(string(prettyJSON))
+		fmt.Print(string(prettyJSON))
 	}
 
 	return nil
