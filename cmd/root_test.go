@@ -119,11 +119,10 @@ func TestCommandExecution(t *testing.T) {
 			args:         []string{"hamster", "-o", filepath.Join(tmpDir, "hamster.json")},
 			expectedFile: filepath.Join(tmpDir, "hamster.json"),
 			expectedInFile: []string{
-				"config:recommended",
 				"gomodTidyE",
 			},
 			notExpected: []string{
-				"config:best-practices",
+				"config:recommended",
 				"replacement",
 			},
 		},
