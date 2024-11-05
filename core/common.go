@@ -73,6 +73,7 @@ func GenerateConfig(configName string) error {
 	opts := pretty.Options{
 		Indent:   "  ",
 		SortKeys: true,
+		Width:    999999,
 	}
 	prettyJSON := pretty.PrettyOptions(jsonBytes, &opts)
 
