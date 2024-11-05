@@ -69,7 +69,8 @@ func GenerateConfig(configName string) error {
 		return fmt.Errorf("error marshaling to JSON: %w", err)
 	}
 
-	prettyJSON := pretty.Pretty(jsonBytes)
+	opts := pretty.Options{SortKeys: true}
+	prettyJSON := pretty.PrettyOptions(jsonBytes, &opts)
 
 	outFile := viper.GetString("outfile")
 	if err := os.WriteFile(outFile, prettyJSON, 0o644); err != nil {
