@@ -9,6 +9,7 @@ import (
 	"cuelang.org/go/cue"
 	"cuelang.org/go/cue/cuecontext"
 	"github.com/spf13/viper"
+	"github.com/tidwall/pretty"
 )
 
 //go:embed schemas.cue cue.mod/module.cue
@@ -63,13 +64,15 @@ func GenerateConfig(configName string) error {
 		return fmt.Errorf("error decoding %s config: %w", configName, err)
 	}
 
-	jsonBytes, err := json.MarshalIndent(renovateConfig, "", "  ")
+	jsonBytes, err := json.Marshal(renovateConfig)
 	if err != nil {
 		return fmt.Errorf("error marshaling to JSON: %w", err)
 	}
 
+	prettyJSON := pretty.Pretty(jsonBytes)
+
 	outFile := viper.GetString("outfile")
-	if err := os.WriteFile(outFile, jsonBytes, 0o644); err != nil {
+	if err := os.WriteFile(outFile, prettyJSON, 0o644); err != nil {
 		return fmt.Errorf("error writing config file: %w", err)
 	}
 
