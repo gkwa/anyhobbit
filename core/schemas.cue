@@ -101,3 +101,11 @@ penguin: #RenovateConfig & bestPracticesBase & commonPatterns.withGoPost & {
 		},
 	]
 }
+
+tiger: #RenovateConfig & bestPracticesBase & commonPatterns.withGoPost & {
+	packageRules: [
+		commonRuleFields & {
+			automergeType: "branch"
+		},
+	]
+}

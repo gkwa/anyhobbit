@@ -43,7 +43,11 @@ var (
 		},
 		"penguin": {
 			short: "Generate Renovate configuration using penguin preset",
-			long:  "Generate Renovate configuration using penguin preset, which auto-merges all dependency types with branch merge strategy and ignores tests.",
+			long:  "Generate Renovate configuration using penguin preset, which auto-merges all dependency types with merge type pr to notify us that merge has happend.",
+		},
+		"tiger": {
+			short: "Generate Renovate configuration using tiger preset",
+			long:  "Generate Renovate configuration using tiger preset, which auto-merges all dependency types with merge type branch to reduce pull request noise.",
 		},
 	}
 )
