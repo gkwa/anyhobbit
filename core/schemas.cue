@@ -92,3 +92,12 @@ monkey: #RenovateConfig & bestPracticesBase & commonPatterns.withGoPost & {
 rabbit: #RenovateConfig & bestPracticesBase & commonPatterns.withGoPost & {
 	packageRules: [commonRuleFields]
 }
+
+penguin: #RenovateConfig & bestPracticesBase & commonPatterns.withGoPost & {
+	packageRules: [
+		commonRuleFields & {
+			automergeType: "branch"
+			ignoreTests:   true
+		},
+	]
+}

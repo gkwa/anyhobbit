@@ -41,6 +41,10 @@ var (
 			short: "Generate Renovate configuration using rabbit preset",
 			long:  "Generate Renovate configuration using rabbit preset, which auto-merges all dependency types and recreates PRs without filtering update types.",
 		},
+		"penguin": {
+			short: "Generate Renovate configuration using penguin preset",
+			long:  "Generate Renovate configuration using penguin preset, which auto-merges all dependency types with branch merge strategy and ignores tests.",
+		},
 	}
 )
 
