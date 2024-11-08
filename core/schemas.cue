@@ -109,3 +109,12 @@ tiger: #RenovateConfig & bestPracticesBase & commonPatterns.withGoPost & {
 		},
 	]
 }
+
+panda: #RenovateConfig & bestPracticesBase & {
+	packageRules: [
+		commonRuleFields & {
+			rangeStrategy: "pin"
+			recreateWhen:  "always"
+		},
+	]
+}
