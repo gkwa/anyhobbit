@@ -20,6 +20,7 @@ package renovate
 #RenovateConfig: {
 	$schema: "https://docs.renovatebot.com/renovate-schema.json"
 	extends?: [...string]
+	lockFileMaintenance?: enabled: bool
 	prHourlyLimit:     0
 	prConcurrentLimit: 0
 	packageRules: [...#PackageRule]
@@ -70,6 +71,7 @@ let commonPatterns = {
 }
 
 rat: #RenovateConfig & bestPracticesBase & {
+	lockFileMaintenance: enabled: true
 	packageRules: [
 		ruleBlocks.noTests & {
 			rangeStrategy: "pin"
@@ -111,6 +113,7 @@ tiger: #RenovateConfig & bestPracticesBase & commonPatterns.withGoPost & {
 }
 
 panda: #RenovateConfig & bestPracticesBase & {
+	lockFileMaintenance: enabled: true
 	packageRules: [
 		commonRuleFields & {
 			rangeStrategy: "pin"
