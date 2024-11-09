@@ -20,6 +20,7 @@ package renovate
 #RenovateConfig: {
 	$schema: "https://docs.renovatebot.com/renovate-schema.json"
 	extends?: [...string]
+	lockFileMaintenance: enabled: true
 	prHourlyLimit:     0
 	prConcurrentLimit: 0
 	packageRules: [...#PackageRule]
