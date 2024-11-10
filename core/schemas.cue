@@ -66,8 +66,14 @@ let goPostUpdateOptions = [
 	"gomodUpdateImportPaths",
 ]
 
+let npmPostUpdateOptions = [
+	"npmDedupe",
+	"pnpmDedupe",
+]
+
 let commonPatterns = {
-	withGoPost: postUpdateOptions: goPostUpdateOptions
+	withGoPost: postUpdateOptions:  goPostUpdateOptions
+	withNpmPost: postUpdateOptions: npmPostUpdateOptions
 }
 
 rat: #RenovateConfig & bestPracticesBase & {
@@ -114,6 +120,15 @@ tiger: #RenovateConfig & bestPracticesBase & commonPatterns.withGoPost & {
 
 panda: #RenovateConfig & bestPracticesBase & {
 	lockFileMaintenance: enabled: true
+	packageRules: [
+		commonRuleFields & {
+			rangeStrategy: "pin"
+			recreateWhen:  "always"
+		},
+	]
+}
+
+koala: #RenovateConfig & bestPracticesBase & commonPatterns.withNpmPost & {
 	packageRules: [
 		commonRuleFields & {
 			rangeStrategy: "pin"

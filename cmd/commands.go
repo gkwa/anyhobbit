@@ -32,4 +32,8 @@ var commands = map[string]struct {
 		short: "Generate Renovate configuration using panda preset",
 		long:  "Generate Renovate configuration using panda preset, which uses pin range strategy with auto-merging and recreation policies.",
 	},
+	"koala": {
+		short: "Generate Renovate configuration using koala preset",
+		long:  "Generate Renovate configuration using koala preset, which auto-merges dependencies with pin strategy and npm/pnpm dedupe options.",
+	},
 }
