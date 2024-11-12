@@ -87,12 +87,12 @@ func TestCommandExecution(t *testing.T) {
 		name           string
 		args           []string
 		expectedFile   string
-		expectedInFile []string // strings that should be present in output
-		notExpected    []string // strings that should not be present
+		expectedInFile []string
+		notExpected    []string
 	}{
 		{
 			name:         "owl command creates config",
-			args:         []string{"owl", "-o", filepath.Join(tmpDir, "owl.json")},
+			args:         []string{"renovate", "owl", "-o", filepath.Join(tmpDir, "owl.json")},
 			expectedFile: filepath.Join(tmpDir, "owl.json"),
 			expectedInFile: []string{
 				"config:best-practices",
@@ -106,7 +106,7 @@ func TestCommandExecution(t *testing.T) {
 		},
 		{
 			name:         "monkey command includes indirect deps",
-			args:         []string{"monkey", "-o", filepath.Join(tmpDir, "monkey.json")},
+			args:         []string{"renovate", "monkey", "-o", filepath.Join(tmpDir, "monkey.json")},
 			expectedFile: filepath.Join(tmpDir, "monkey.json"),
 			expectedInFile: []string{
 				"matchDepTypes",
@@ -116,7 +116,7 @@ func TestCommandExecution(t *testing.T) {
 		},
 		{
 			name:         "default output file",
-			args:         []string{"rat", "-o", filepath.Join(tmpDir, "default.json")},
+			args:         []string{"renovate", "rat", "-o", filepath.Join(tmpDir, "default.json")},
 			expectedFile: filepath.Join(tmpDir, "default.json"),
 			expectedInFile: []string{
 				"rangeStrategy",
@@ -127,21 +127,17 @@ func TestCommandExecution(t *testing.T) {
 
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			// Execute command
 			rootCmd.SetArgs(tt.args)
 			err := rootCmd.Execute()
 			require.NoError(t, err)
 
-			// Check file exists and content
 			content, err := os.ReadFile(tt.expectedFile)
 			require.NoError(t, err, "should be able to read output file")
 
-			// Check expected contents
 			for _, expected := range tt.expectedInFile {
 				assert.Contains(t, string(content), expected)
 			}
 
-			// Check things that shouldn't be there
 			for _, notExpected := range tt.notExpected {
 				assert.NotContains(t, string(content), notExpected)
 			}
@@ -159,21 +155,30 @@ func TestInvalidCommand(t *testing.T) {
 	}{
 		{
 			name:        "non-existent animal",
-			args:        []string{"giraffe"},
-			expectedErr: "unknown command",
+			args:        []string{"renovate", "giraffe"},
+			expectedErr: `unknown command "giraffe" for "anyhobbit renovate"`,
 		},
 		{
 			name:        "invalid output dir",
-			args:        []string{"owl", "-o", filepath.Join(tmpDir, "nonexistent", "config.json")},
+			args:        []string{"renovate", "owl", "-o", filepath.Join(tmpDir, "nonexistent", "config.json")},
 			expectedErr: "error writing config file",
 		},
 	}
 
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
+			defer func() {
+				if r := recover(); r != nil {
+					t.Errorf("Test panicked: %v", r)
+				}
+			}()
+
 			rootCmd.SetArgs(tt.args)
 			err := rootCmd.Execute()
-			assert.Error(t, err)
+			if err == nil {
+				t.Error("Expected an error but got nil")
+				return
+			}
 			assert.Contains(t, err.Error(), tt.expectedErr)
 		})
 	}

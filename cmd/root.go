@@ -36,6 +36,18 @@ var rootCmd = &cobra.Command{
 	},
 }
 
+var renovateCmd = &cobra.Command{
+	Use:   "renovate",
+	Short: "Renovate subcommands",
+	Long:  "Renovate subcommands for generating different Renovate configuration presets",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		if len(args) == 0 {
+			return cmd.Help()
+		}
+		return fmt.Errorf("unknown command %q for %q", args[0], cmd.CommandPath())
+	},
+}
+
 func createCommand(name, short, long string) {
 	cmd := &cobra.Command{
 		Use:   name,
@@ -45,7 +57,7 @@ func createCommand(name, short, long string) {
 			return core.GenerateConfig(name)
 		},
 	}
-	rootCmd.AddCommand(cmd)
+	renovateCmd.AddCommand(cmd)
 }
 
 func Execute() {
@@ -81,7 +93,8 @@ func init() {
 		os.Exit(1)
 	}
 
-	// Add all commands from the map
+	rootCmd.AddCommand(renovateCmd)
+
 	for name, cmd := range commands {
 		createCommand(name, cmd.short, cmd.long)
 	}

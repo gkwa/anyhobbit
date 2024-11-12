@@ -19,19 +19,23 @@ anyhobbit --help
 
 ## Cheatsheet
 
+List all available presets:
+```bash
+anyhobbit zoo
+```
+
 Generate config with specific preset:
 ```bash
-anyhobbit owl    # Aggressive updates including replacements
-anyhobbit rat    # Auto-merge standard updates, no tests
-anyhobbit dog    # Auto-merge and recreate PRs for standard updates
-anyhobbit monkey # Auto-merge all updates including indirect deps
-anyhobbit hamster # Auto-merge standard updates with recommended base
+anyhobbit renovate owl    # Aggressive updates including replacements
+anyhobbit renovate rat    # Auto-merge standard updates, no tests
+anyhobbit renovate monkey # Auto-merge all updates including indirect deps
+anyhobbit renovate penguin # Auto-merge with PR notifications
 ```
 
 Specify output file:
 ```bash
-anyhobbit owl -o custom.json
-anyhobbit owl --outfile custom.json
+anyhobbit renovate owl -o custom.json
+anyhobbit renovate owl --outfile custom.json
 ```
 
 Default output is `.renovaterc.json` in current directory.
@@ -40,9 +44,12 @@ Default output is `.renovaterc.json` in current directory.
 
 - **owl**: Most aggressive. Auto-merges all updates including replacements, recreates PRs when needed
 - **rat**: Auto-merges standard updates without running tests
-- **dog**: Auto-merges standard updates with PR recreation
 - **monkey**: Auto-merges all updates including indirect dependencies
-- **hamster**: Conservative auto-merging of standard updates using recommended base config
+- **penguin**: Auto-merges with PR notifications for tracking merged updates
+- **rabbit**: Auto-merges all dependency types with PR recreation
+- **tiger**: Auto-merges with branch merging to reduce PR noise
+- **panda**: Uses pin range strategy with auto-merging
+- **koala**: Auto-merges with npm/pnpm dedupe options
 
 ## Usage Example
 
@@ -50,8 +57,11 @@ Default output is `.renovaterc.json` in current directory.
 # Show available commands and flags
 anyhobbit --help
 
+# List all preset strategies
+anyhobbit zoo
+
 # Generate owl preset config
-anyhobbit owl
+anyhobbit renovate owl
 
 # Check generated config
 cat .renovaterc.json
