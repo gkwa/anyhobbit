@@ -108,4 +108,4 @@ help:
 
 .PHONY: clean # clean bin and generated files
 clean:
-	$(RM) -r $(BIN) .timestamps cmd/commands.go
+	$(RM) -r $(BIN) .timestamps 
