@@ -15,6 +15,8 @@ import (
 //go:embed schemas.cue cue.mod/module.cue
 var schemaFS embed.FS
 
+const maxLineWidth = 999999
+
 // loadCueValues loads and compiles both schema and module files
 func loadCueValues() (*cue.Value, error) {
 	schemaBytes, err := schemaFS.ReadFile("schemas.cue")
@@ -73,7 +75,7 @@ func GenerateConfig(configName string) error {
 	opts := pretty.Options{
 		Indent:   "  ",
 		SortKeys: true,
-		Width:    999999,
+		Width:    maxLineWidth,
 	}
 	prettyJSON := pretty.PrettyOptions(jsonBytes, &opts)
 
