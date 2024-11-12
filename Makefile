@@ -17,22 +17,24 @@ LDFLAGS += -X '$(PREFIX).GoVersion=$(GOVERSION)'
 LDFLAGS += -X $(PREFIX).ShortGitSHA=$(SHORT_SHA)
 LDFLAGS += -X $(PREFIX).FullGitSHA=$(FULL_SHA)
 
-.DEFAULT_GOAL := iterate
+.DEFAULT_GOAL := build
 
-all: check $(BIN) install
-
-.PHONY: iterate # lint and rebuild
-iterate: check $(BIN)
+all: generate check $(BIN) install
 
 .PHONY: check # lint and vet
-check: .timestamps/.check.time
+check: generate .timestamps/.check.time
 
 .timestamps/.check.time: goimports tidy fmt lint vet
 	@mkdir -p .timestamps
 	@touch $@
 
+.PHONY: generate # run go generate
+generate: core/schemas.cue core/gen/main.go
+	@mkdir -p cmd
+	go generate ./...
+
 .PHONY: build # build
-build: $(BIN)
+build: generate $(BIN)
 
 $(BIN): .timestamps/.build.time .timestamps/.tidy.time
 	go build -ldflags "$(LDFLAGS)" -o $@
@@ -45,7 +47,7 @@ $(BIN): .timestamps/.build.time .timestamps/.tidy.time
 goreleaser: goreleaser --clean
 
 .PHONY: goimports # goimports-reviser
-goimports: .timestamps/.goimports.time
+goimports: generate .timestamps/.goimports.time
 .timestamps/.goimports.time: $(SRC)
 	goimports -w $(SRC)
 	goimports-reviser -output=file -set-alias -rm-unused -format $(SRC)
@@ -53,7 +55,7 @@ goimports: .timestamps/.goimports.time
 	@touch $@
 
 .PHONY: tidy # go mod tidy
-tidy: .timestamps/.tidy.time
+tidy: generate .timestamps/.tidy.time
 
 .timestamps/.tidy.time: go.mod go.sum
 	go mod tidy
@@ -61,7 +63,7 @@ tidy: .timestamps/.tidy.time
 	@touch $@
 
 .PHONY: fmt # gofumt
-fmt: .timestamps/.fmt.time
+fmt: generate .timestamps/.fmt.time
 .timestamps/.fmt.time: $(SRC)
 	gofumpt -extra -w $(SRC)
 	cue fmt --simplify --files core
@@ -69,28 +71,28 @@ fmt: .timestamps/.fmt.time
 	@touch $@
 
 .PHONY: golines # golines
-golines: .timestamps/.golines.time
+golines: generate .timestamps/.golines.time
 .timestamps/.golines.time: $(SRC)
 	golines -w $(SRC)
 	@mkdir -p .timestamps
 	@touch $@
 
 .PHONY: lint # lint
-lint: .timestamps/.lint.time
+lint: generate .timestamps/.lint.time
 .timestamps/.lint.time: $(SRC)
 	golangci-lint run
 	@mkdir -p .timestamps
 	@touch $@
 
 .PHONY: vet # go vet
-vet: .timestamps/.vet.time
+vet: generate .timestamps/.vet.time
 .timestamps/.vet.time: $(SRC)
 	go vet ./...
 	@mkdir -p .timestamps
 	@touch $@
 
 .PHONY: test # go test
-test:
+test: generate
 	go test ./...
 	@mkdir -p .timestamps
 	@touch $@
@@ -103,6 +105,6 @@ install:
 help:
 	@grep '^.PHONY: .* #' Makefile | sed 's/\.PHONY: \(.*\) # \(.*\)/\1 \2/' | expand -t20
 
-.PHONY: clean # clean bin
+.PHONY: clean # clean bin and generated files
 clean:
-	$(RM) -r $(BIN) .timestamps
+	$(RM) -r $(BIN) .timestamps cmd/commands.go
