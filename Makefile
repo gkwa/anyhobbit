@@ -67,6 +67,7 @@ fmt: generate .timestamps/.fmt.time
 .timestamps/.fmt.time: $(SRC)
 	gofumpt -extra -w $(SRC)
 	cue fmt --simplify --files core
+	prettier --ignore-path=.prettierignore --config=.prettierrc.json --write .
 	@mkdir -p .timestamps
 	@touch $@
 
