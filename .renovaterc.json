@@ -19,10 +19,11 @@
     {
       "customType": "regex",
       "datasourceTemplate": "go",
+      "versioningTemplate": "semver",
       "fileMatch": ["^.github/workflows/[^/]+\\.ya?ml$"],
-      "matchStrings": [
-        "go\\s+install\\s+(?<depName>[^@\\s]+)@(?<currentValue>[^\\s]+)"
-      ]
+      "matchStrings": ["go\\s+install\\s+(?<depName>[^@\\s]+)@(?<currentValue>[^\\s]+)"],
+      "extractVersionTemplate": "^v?(?<version>\\d+\\.\\d+\\.\\d+)",
+      "currentValueTemplate": "v${{ version }}"
     }
   ],
   "platformAutomerge": true,
