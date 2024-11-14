@@ -1,16 +1,6 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": ["config:best-practices", ":dependencyDashboard"],
-  "customManagers": [
-    {
-      "customType": "regex",
-      "fileMatch": ["^.github/workflows/[^/]+\\.ya?ml$"],
-      "matchStrings": ["go\\s+install\\s+(?<package>[^@\\s]+)@(?<currentValue>\\S+)"],
-      "datasourceTemplate": "go",
-      "depNameTemplate": "{{{package}}}",
-      "versioningTemplate": "semver"
-    }
-  ],
   "packageRules": [
     {
       "automerge": true,
