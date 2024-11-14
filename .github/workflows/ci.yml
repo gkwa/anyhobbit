@@ -39,10 +39,10 @@ jobs:
             ${{ runner.os }}-go-tools-
       - name: Install Tools
         run: |
-          command -v goimports >/dev/null 2>&1 || go install golang.org/x/tools/cmd/goimports@latest
-          command -v gofumpt >/dev/null 2>&1 || go install mvdan.cc/gofumpt@latest
-          command -v golines >/dev/null 2>&1 || go install github.com/segmentio/golines@latest
-          command -v goimports-reviser >/dev/null 2>&1 || go install github.com/incu6us/goimports-reviser/v3@latest
+          go install golang.org/x/tools/cmd/goimports@latest
+          go install mvdan.cc/gofumpt@latest
+          go install github.com/segmentio/golines@latest
+          go install github.com/incu6us/goimports-reviser/v3@latest
       - name: Set GOVERSION environment variable (Linux/macOS)
         if: runner.os != 'Windows'
         run: echo "GOVERSION=$(go version)" >> $GITHUB_ENV
