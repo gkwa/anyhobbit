@@ -11,8 +11,9 @@
     },
     {
       "matchManagers": ["custom.regex"],
-      "pinDigests": true,
-      "rangeStrategy": "pin"
+      "matchCurrentVersion": "latest",
+      "rangeStrategy": "pin",
+      "pinDigests": true
     }
   ],
   "customManagers": [
