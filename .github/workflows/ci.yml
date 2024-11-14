@@ -23,7 +23,7 @@ jobs:
       - uses: actions/setup-go@41dfa10bad2bb2ae585af6ee5bb4d7d973ad74ed
         with:
           go-version: stable
-      - uses: cue-lang/setup-cue@v1.0.0
+      - uses: cue-lang/setup-cue@a93fa358375740cd8b0078f76355512b9208acb1 # v1.0.1
         with:
           version: latest
       - uses: golangci/golangci-lint-action@v6.1.1
