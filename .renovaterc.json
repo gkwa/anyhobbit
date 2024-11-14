@@ -8,6 +8,11 @@
       "automergeType": "branch",
       "matchDepTypes": ["*"],
       "recreateWhen": "always"
+    },
+    {
+      "matchManagers": ["regex"],
+      "pinDigests": true,
+      "rangeStrategy": "pin"
     }
   ],
   "customManagers": [
@@ -15,9 +20,7 @@
       "customType": "regex",
       "datasourceTemplate": "go",
       "fileMatch": ["^.github/workflows/[^/]+\\.ya?ml$"],
-      "matchStrings": ["go\\s+install\\s+(?<depName>[^@\\s]+)@(?<currentValue>[^\\s]+)"],
-      "pinDigests": true,
-      "rangeStrategy": "pin"
+      "matchStrings": ["go\\s+install\\s+(?<depName>[^@\\s]+)@(?<currentValue>[^\\s]+)"]
     }
   ],
   "platformAutomerge": true,
