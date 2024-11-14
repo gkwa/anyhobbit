@@ -23,14 +23,22 @@ jobs:
       - uses: actions/setup-go@41dfa10bad2bb2ae585af6ee5bb4d7d973ad74ed
         with:
           go-version: ">=1.21.1"
+      - uses: actions/cache@704facf57e6136b1bc63b828d79edcd491f0ee84
+        with:
+          path: |
+            ~/go/bin
+            ~/go/pkg/mod
+          key: ${{ runner.os }}-go-tools-${{ hashFiles('**/go.sum') }}
+          restore-keys: |
+            ${{ runner.os }}-go-tools-
       - name: Install Tools
         run: |
-          go install cuelang.org/go/cmd/cue@latest
-          go install golang.org/x/tools/cmd/goimports@latest
-          go install mvdan.cc/gofumpt@latest
-          go install github.com/segmentio/golines@latest
-          go install github.com/golangci/golangci-lint/cmd/golangci-lint@latest
-          go install github.com/incu6us/goimports-reviser/v3@latest
+          command -v cue >/dev/null 2>&1 || go install cuelang.org/go/cmd/cue@latest
+          command -v goimports >/dev/null 2>&1 || go install golang.org/x/tools/cmd/goimports@latest
+          command -v gofumpt >/dev/null 2>&1 || go install mvdan.cc/gofumpt@latest
+          command -v golines >/dev/null 2>&1 || go install github.com/segmentio/golines@latest
+          command -v golangci-lint >/dev/null 2>&1 || go install github.com/golangci/golangci-lint/cmd/golangci-lint@latest
+          command -v goimports-reviser >/dev/null 2>&1 || go install github.com/incu6us/goimports-reviser/v3@latest
       - name: Set GOVERSION environment variable (Linux/macOS)
         if: runner.os != 'Windows'
         run: echo "GOVERSION=$(go version)" >> $GITHUB_ENV
