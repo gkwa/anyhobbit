@@ -10,10 +10,12 @@
       "recreateWhen": "always"
     },
     {
-      "matchManagers": ["regex"],
+      "matchManagers": ["custom.regex"],
       "datasourceTemplate": "go",
       "fileMatch": ["^.github/workflows/[^/]+\\.ya?ml$"],
-      "matchStrings": ["go\\s+install\\s+(?<depName>[^@\\s]+)@(?<currentValue>[^\\s]+)"],
+      "matchStrings": [
+        "go\\s+install\\s+(?<depName>[^@\\s]+)@(?<currentValue>[^\\s]+)"
+      ],
       "pinDigests": true,
       "rangeStrategy": "pin"
     }
