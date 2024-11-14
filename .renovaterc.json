@@ -1,6 +1,16 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": ["config:best-practices", ":dependencyDashboard"],
+  "customManagers": [
+    {
+      "customType": "regex",
+      "fileMatch": ["^.github/workflows/[^/]+\\.ya?ml$"],
+      "matchStrings": ["go\\s+install\\s+(?<package>[^@\\s]+)@(?<currentValue>\\S+)"],
+      "datasourceTemplate": "go",
+      "depNameTemplate": "{{{package}}}",
+      "versioningTemplate": "semver"
+    }
+  ],
   "packageRules": [
     {
       "automerge": true,
@@ -8,22 +18,6 @@
       "automergeType": "branch",
       "matchDepTypes": ["*"],
       "recreateWhen": "always"
-    },
-    {
-      "matchManagers": ["custom.regex"],
-      "matchDepTypes": ["go-install"],
-      "matchCurrentValue": "/^latest$/",
-      "rangeStrategy": "pin"
-    }
-  ],
-  "customManagers": [
-    {
-      "customType": "regex",
-      "fileMatch": ["^.github/workflows/[^/]+\\.ya?ml$"],
-      "matchStrings": ["go\\s+install\\s+(?<depName>[^@\\s]+)@(?<currentValue>\\S+)"],
-      "datasourceTemplate": "go",
-      "depTypeTemplate": "go-install",
-      "versioningTemplate": "semver-coerced"
     }
   ],
   "platformAutomerge": true,
