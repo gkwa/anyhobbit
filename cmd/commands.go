@@ -6,6 +6,10 @@ var commands = map[string]struct {
 	short string
 	long  string
 }{
+	"hamster": {
+		short: "Generate Renovate configuration using hamster preset",
+		long:  "Generate Renovate configuration using hamster preset, which auto-merges all dependency types and recreates PRs without filtering update types or post-update options.",
+	},
 	"koala": {
 		short: "Generate Renovate configuration using koala preset",
 		long:  "Generate Renovate configuration using koala preset, which auto-merges dependencies with pin strategy and npm/pnpm dedupe options.",
