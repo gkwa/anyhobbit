@@ -1,7 +1,11 @@
 package renovate
+
 #UpdateType: "minor" | "patch" | "pin" | "digest" | "replacement"
-#DepType:    "*" | "indirect"
-#Manager:    "gomod"
+
+#DepType: "*" | "indirect"
+
+#Manager: "gomod"
+
 #PackageRule: {
 	rangeStrategy?: string
 	ignoreTests?:   bool
@@ -14,6 +18,7 @@ package renovate
 	automergeStrategy?: string
 	recreateWhen?:      string
 }
+
 #RenovateConfig: {
 	$schema: "https://docs.renovatebot.com/renovate-schema.json"
 	extends?: [...string]
@@ -25,46 +30,55 @@ package renovate
 	postUpdateOptions?: [...string]
 	platformAutomerge: true
 }
+
 let bestPracticesBase = {
 	extends: [
 		"config:best-practices",
 		":dependencyDashboard",
 	]
 }
+
 let commonRuleFields = {
 	matchDepTypes: ["*"]
 	automerge:         true
 	automergeStrategy: "merge-commit"
 	recreateWhen:      "always"
 }
+
 ruleBlocks: {
 	indirectDeps: #PackageRule & {
 		matchDepTypes: ["indirect"]
 		enabled: true
 		matchManagers: ["gomod"]
 	}
+
 	noTests: #PackageRule & commonRuleFields & {
 		ignoreTests:   true
 		automergeType: "branch"
 	}
 }
+
 updateTypes: {
 	standard: ["minor", "patch", "pin", "digest"]
 	withReplacement: standard + ["replacement"]
 }
+
 let goPostUpdateOptions = [
 	"gomodTidyE",
 	"gomodMassage",
 	"gomodUpdateImportPaths",
 ]
+
 let npmPostUpdateOptions = [
 	"npmDedupe",
 	"pnpmDedupe",
 ]
+
 let commonPatterns = {
 	withGoPost: postUpdateOptions:  goPostUpdateOptions
 	withNpmPost: postUpdateOptions: npmPostUpdateOptions
 }
+
 // @animal
 // preset: focuses on auto-merging standard updates with no automated testing
 rat: #RenovateConfig & bestPracticesBase & {
@@ -75,12 +89,14 @@ rat: #RenovateConfig & bestPracticesBase & {
 		},
 	]
 }
+
 // @animal
 // preset: auto-merges and recreates PRs for all update types including replacements
 owl: #RenovateConfig & bestPracticesBase & commonPatterns.withGoPost & {
 	packageRules: [commonRuleFields]
 	ignorePaths: ["**/testdata/go.mod"]
 }
+
 // @animal
 // preset: auto-merges all updates including indirect dependencies
 monkey: #RenovateConfig & bestPracticesBase & commonPatterns.withGoPost & {
@@ -89,16 +105,19 @@ monkey: #RenovateConfig & bestPracticesBase & commonPatterns.withGoPost & {
 		commonRuleFields & ruleBlocks.noTests,
 	]
 }
+
 // @animal
 // preset: auto-merges all dependency types and recreates PRs without filtering update types
 rabbit: #RenovateConfig & bestPracticesBase & commonPatterns.withGoPost & {
 	packageRules: [commonRuleFields]
 }
+
 // @animal
 // preset: auto-merges all dependency types and recreates PRs without filtering update types or post-update options
 hamster: #RenovateConfig & bestPracticesBase & {
 	packageRules: [commonRuleFields]
 }
+
 // @animal
 // preset: auto-merges all dependency types with merge type pr to notify us that merge has happened
 penguin: #RenovateConfig & bestPracticesBase & commonPatterns.withGoPost & {
@@ -109,6 +128,7 @@ penguin: #RenovateConfig & bestPracticesBase & commonPatterns.withGoPost & {
 		},
 	]
 }
+
 // @animal
 // preset: auto-merges all dependency types with merge type branch to reduce pull request noise
 tiger: #RenovateConfig & bestPracticesBase & commonPatterns.withGoPost & {
@@ -118,6 +138,7 @@ tiger: #RenovateConfig & bestPracticesBase & commonPatterns.withGoPost & {
 		},
 	]
 }
+
 // @animal
 // preset: uses pin range strategy with auto-merging and recreation policies
 panda: #RenovateConfig & bestPracticesBase & {
@@ -129,6 +150,7 @@ panda: #RenovateConfig & bestPracticesBase & {
 		},
 	]
 }
+
 // @animal
 // preset: auto-merges dependencies with pin strategy and npm/pnpm dedupe options
 koala: #RenovateConfig & bestPracticesBase & commonPatterns.withNpmPost & {
