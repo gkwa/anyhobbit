@@ -119,7 +119,7 @@ hamster: #RenovateConfig & bestPracticesBase & {
 }
 
 // @animal
-// preset: auto-merges all dependency types with merge type pr to notify us that merge has happened
+// preset: auto-merges all dependency types with merge type branch to prevent noisey pull request emails
 penguin: #RenovateConfig & bestPracticesBase & commonPatterns.withGoPost & {
 	packageRules: [
 		commonRuleFields & {
@@ -161,3 +161,14 @@ koala: #RenovateConfig & bestPracticesBase & commonPatterns.withNpmPost & {
 		},
 	]
 }
+
+// @animal
+// preset: auto-merges all dependency types with merge type pr and ignore tests since we don't have any
+lion: #RenovateConfig & bestPracticesBase & commonPatterns.withGoPost & {
+	packageRules: [
+		commonRuleFields & {
+			ignoreTests:   true
+		},
+	]
+}
+

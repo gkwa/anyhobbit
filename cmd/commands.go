@@ -14,6 +14,10 @@ var commands = map[string]struct {
 		short: "Generate Renovate configuration using koala preset",
 		long:  "Generate Renovate configuration using koala preset, which auto-merges dependencies with pin strategy and npm/pnpm dedupe options.",
 	},
+	"lion": {
+		short: "Generate Renovate configuration using lion preset",
+		long:  "Generate Renovate configuration using lion preset, which auto-merges all dependency types with merge type pr and ignore tests since we don't have any.",
+	},
 	"monkey": {
 		short: "Generate Renovate configuration using monkey preset",
 		long:  "Generate Renovate configuration using monkey preset, which auto-merges all updates including indirect dependencies.",
@@ -28,7 +32,7 @@ var commands = map[string]struct {
 	},
 	"penguin": {
 		short: "Generate Renovate configuration using penguin preset",
-		long:  "Generate Renovate configuration using penguin preset, which auto-merges all dependency types with merge type pr to notify us that merge has happened.",
+		long:  "Generate Renovate configuration using penguin preset, which auto-merges all dependency types with merge type branch to prevent noisey pull request emails.",
 	},
 	"rabbit": {
 		short: "Generate Renovate configuration using rabbit preset",
