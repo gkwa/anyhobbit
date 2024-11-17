@@ -167,8 +167,7 @@ koala: #RenovateConfig & bestPracticesBase & commonPatterns.withNpmPost & {
 lion: #RenovateConfig & bestPracticesBase & commonPatterns.withGoPost & {
 	packageRules: [
 		commonRuleFields & {
-			ignoreTests:   true
+			ignoreTests: true
 		},
 	]
 }
-
