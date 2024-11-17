@@ -30,14 +30,6 @@ jobs:
         with:
           version: latest
           args: --timeout=3m --verbose
-      - uses: actions/cache@6849a6489940f00c2f30c0fb92c6274307ccb58a
-        with:
-          path: |
-            ~/go/bin
-            ~/go/pkg/mod
-          key: ${{ runner.os }}-go-tools-${{ hashFiles('**/go.sum') }}
-          restore-keys: |
-            ${{ runner.os }}-go-tools-
       - name: Install Tools
         run: |
           go install golang.org/x/tools/cmd/goimports@latest
