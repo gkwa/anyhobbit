@@ -29,6 +29,7 @@ package renovate
 	ignorePaths?: [...string]
 	postUpdateOptions?: [...string]
 	platformAutomerge: true
+	prCreation:        string | *"immediate"
 }
 
 let bestPracticesBase = {
@@ -170,4 +171,34 @@ lion: #RenovateConfig & bestPracticesBase & commonPatterns.withGoPost & {
 			ignoreTests: true
 		},
 	]
+}
+
+// @animal
+// preset: same as rat but with prCreation not-pending
+mouse: rat & {
+	prCreation: "not-pending"
+}
+
+// @animal
+// preset: same as owl but with prCreation not-pending
+eagle: owl & {
+	prCreation: "not-pending"
+}
+
+// @animal
+// preset: same as monkey but with prCreation not-pending
+gorilla: monkey & {
+	prCreation: "not-pending"
+}
+
+// @animal
+// preset: same as rabbit but with prCreation not-pending
+hare: rabbit & {
+	prCreation: "not-pending"
+}
+
+// @animal
+// preset: same as hamster but with prCreation not-pending
+gerbil: hamster & {
+	prCreation: "not-pending"
 }

@@ -6,9 +6,25 @@ var commands = map[string]struct {
 	short string
 	long  string
 }{
+	"eagle": {
+		short: "Generate Renovate configuration using eagle preset",
+		long:  "Generate Renovate configuration using eagle preset, which same as owl but with prCreation not-pending.",
+	},
+	"gerbil": {
+		short: "Generate Renovate configuration using gerbil preset",
+		long:  "Generate Renovate configuration using gerbil preset, which same as hamster but with prCreation not-pending.",
+	},
+	"gorilla": {
+		short: "Generate Renovate configuration using gorilla preset",
+		long:  "Generate Renovate configuration using gorilla preset, which same as monkey but with prCreation not-pending.",
+	},
 	"hamster": {
 		short: "Generate Renovate configuration using hamster preset",
 		long:  "Generate Renovate configuration using hamster preset, which auto-merges all dependency types and recreates PRs without filtering update types or post-update options.",
+	},
+	"hare": {
+		short: "Generate Renovate configuration using hare preset",
+		long:  "Generate Renovate configuration using hare preset, which same as rabbit but with prCreation not-pending.",
 	},
 	"koala": {
 		short: "Generate Renovate configuration using koala preset",
@@ -21,6 +37,10 @@ var commands = map[string]struct {
 	"monkey": {
 		short: "Generate Renovate configuration using monkey preset",
 		long:  "Generate Renovate configuration using monkey preset, which auto-merges all updates including indirect dependencies.",
+	},
+	"mouse": {
+		short: "Generate Renovate configuration using mouse preset",
+		long:  "Generate Renovate configuration using mouse preset, which same as rat but with prCreation not-pending.",
 	},
 	"owl": {
 		short: "Generate Renovate configuration using owl preset",

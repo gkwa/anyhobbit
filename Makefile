@@ -108,4 +108,4 @@ help:
 
 .PHONY: clean # clean bin and generated files
 clean:
-	$(RM) -r $(BIN) .timestamps 
+	$(RM) -r $(BIN) .timestamps
