@@ -22,7 +22,7 @@ jobs:
       - uses: actions/checkout@cbb722410c2e876e24abbe8de2cc27693e501dcb
       - uses: actions/setup-go@41dfa10bad2bb2ae585af6ee5bb4d7d973ad74ed
         with:
-          go-version: stable
+          go-version: latest
       - uses: cue-lang/setup-cue@a93fa358375740cd8b0078f76355512b9208acb1 # v1.0.1
       - uses: golangci/golangci-lint-action@971e284b6050e8a5849b72094c50ab08da042db8 # v6.1.1
         with:
