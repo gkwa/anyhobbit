@@ -12,5 +12,6 @@
   "platformAutomerge": true,
   "postUpdateOptions": ["gomodTidyE", "gomodMassage", "gomodUpdateImportPaths"],
   "prConcurrentLimit": 0,
+  "prCreation": "not-pending",
   "prHourlyLimit": 0
 }
