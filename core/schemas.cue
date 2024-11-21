@@ -1,5 +1,7 @@
 package renovate
 
+import "list"
+
 #UpdateType: "minor" | "patch" | "pin" | "digest" | "replacement"
 
 #DepType: "*" | "indirect"
@@ -61,7 +63,7 @@ ruleBlocks: {
 
 updateTypes: {
 	standard: ["minor", "patch", "pin", "digest"]
-	withReplacement: standard + ["replacement"]
+	withReplacement: list.Concat([standard, ["replacement"]])
 }
 
 let goPostUpdateOptions = [
