@@ -53,3 +53,10 @@ jobs:
         if: runner.os == 'Linux'
         shell: script -q -e -c "bash {0}"
         run: go run main.go -- main.go
+  required-check:
+    name: All Tests Passed
+    needs:
+      - build
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "All tests passed!"
