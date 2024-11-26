@@ -13,5 +13,6 @@
   "postUpdateOptions": ["gomodTidyE", "gomodMassage", "gomodUpdateImportPaths"],
   "prConcurrentLimit": 0,
   "prCreation": "not-pending",
+  "prNotPendingHours": 1,
   "prHourlyLimit": 0
 }
