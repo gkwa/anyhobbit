@@ -32,7 +32,7 @@ import "list"
 	postUpdateOptions?: [...string]
 	platformAutomerge:  true
 	prCreation?:        string
-	prNotPendingHours?: int
+	prNotPendingHours?: int & >=1 & <24
 }
 
 let bestPracticesBase = {
