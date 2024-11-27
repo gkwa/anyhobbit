@@ -207,36 +207,31 @@ gerbil: hamster & {
 }
 
 // @animal
-// preset: same as penguin but with prCreation not-pending and prNotPendingHours 1
-seal: penguin & {
-	prCreation:        "not-pending"
+// preset: same as mouse but with prNotPendingHours 1
+shrew: mouse & {
 	prNotPendingHours: 1
 }
 
 // @animal
-// preset: same as tiger but with prCreation not-pending and prNotPendingHours 1
-leopard: tiger & {
-	prCreation:        "not-pending"
+// preset: same as eagle but with prNotPendingHours 1
+hawk: eagle & {
 	prNotPendingHours: 1
 }
 
 // @animal
-// preset: same as panda but with prCreation not-pending and prNotPendingHours 1
-bear: panda & {
-	prCreation:        "not-pending"
+// preset: same as gorilla but with prNotPendingHours 1
+chimp: gorilla & {
 	prNotPendingHours: 1
 }
 
 // @animal
-// preset: same as koala but with prCreation not-pending and prNotPendingHours 1
-kangaroo: koala & {
-	prCreation:        "not-pending"
+// preset: same as hare but with prNotPendingHours 1
+bunny: hare & {
 	prNotPendingHours: 1
 }
 
 // @animal
-// preset: same as lion but with prCreation not-pending and prNotPendingHours 1
-jaguar: lion & {
-	prCreation:        "not-pending"
+// preset: same as gerbil but with prNotPendingHours 1
+guinea: gerbil & {
 	prNotPendingHours: 1
 }
