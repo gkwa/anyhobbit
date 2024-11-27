@@ -30,8 +30,9 @@ import "list"
 	packageRules: [...#PackageRule]
 	ignorePaths?: [...string]
 	postUpdateOptions?: [...string]
-	platformAutomerge: true
-	prCreation?:       string
+	platformAutomerge:  true
+	prCreation?:        string
+	prNotPendingHours?: int
 }
 
 let bestPracticesBase = {
@@ -203,4 +204,39 @@ hare: rabbit & {
 // preset: same as hamster but with prCreation not-pending
 gerbil: hamster & {
 	prCreation: "not-pending"
+}
+
+// @animal
+// preset: same as penguin but with prCreation not-pending and prNotPendingHours 1
+seal: penguin & {
+	prCreation:        "not-pending"
+	prNotPendingHours: 1
+}
+
+// @animal
+// preset: same as tiger but with prCreation not-pending and prNotPendingHours 1
+leopard: tiger & {
+	prCreation:        "not-pending"
+	prNotPendingHours: 1
+}
+
+// @animal
+// preset: same as panda but with prCreation not-pending and prNotPendingHours 1
+bear: panda & {
+	prCreation:        "not-pending"
+	prNotPendingHours: 1
+}
+
+// @animal
+// preset: same as koala but with prCreation not-pending and prNotPendingHours 1
+kangaroo: koala & {
+	prCreation:        "not-pending"
+	prNotPendingHours: 1
+}
+
+// @animal
+// preset: same as lion but with prCreation not-pending and prNotPendingHours 1
+jaguar: lion & {
+	prCreation:        "not-pending"
+	prNotPendingHours: 1
 }

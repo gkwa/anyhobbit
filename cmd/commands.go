@@ -6,6 +6,10 @@ var commands = map[string]struct {
 	short string
 	long  string
 }{
+	"bear": {
+		short: "Generate Renovate configuration using bear preset",
+		long:  "Generate Renovate configuration using bear preset, which same as panda but with prCreation not-pending and prNotPendingHours 1.",
+	},
 	"eagle": {
 		short: "Generate Renovate configuration using eagle preset",
 		long:  "Generate Renovate configuration using eagle preset, which same as owl but with prCreation not-pending.",
@@ -26,9 +30,21 @@ var commands = map[string]struct {
 		short: "Generate Renovate configuration using hare preset",
 		long:  "Generate Renovate configuration using hare preset, which same as rabbit but with prCreation not-pending.",
 	},
+	"jaguar": {
+		short: "Generate Renovate configuration using jaguar preset",
+		long:  "Generate Renovate configuration using jaguar preset, which same as lion but with prCreation not-pending and prNotPendingHours 1.",
+	},
+	"kangaroo": {
+		short: "Generate Renovate configuration using kangaroo preset",
+		long:  "Generate Renovate configuration using kangaroo preset, which same as koala but with prCreation not-pending and prNotPendingHours 1.",
+	},
 	"koala": {
 		short: "Generate Renovate configuration using koala preset",
 		long:  "Generate Renovate configuration using koala preset, which auto-merges dependencies with pin strategy and npm/pnpm dedupe options.",
+	},
+	"leopard": {
+		short: "Generate Renovate configuration using leopard preset",
+		long:  "Generate Renovate configuration using leopard preset, which same as tiger but with prCreation not-pending and prNotPendingHours 1.",
 	},
 	"lion": {
 		short: "Generate Renovate configuration using lion preset",
@@ -61,6 +77,10 @@ var commands = map[string]struct {
 	"rat": {
 		short: "Generate Renovate configuration using rat preset",
 		long:  "Generate Renovate configuration using rat preset, which focuses on auto-merging standard updates with no automated testing.",
+	},
+	"seal": {
+		short: "Generate Renovate configuration using seal preset",
+		long:  "Generate Renovate configuration using seal preset, which same as penguin but with prCreation not-pending and prNotPendingHours 1.",
 	},
 	"tiger": {
 		short: "Generate Renovate configuration using tiger preset",
