@@ -31,7 +31,7 @@ import "list"
 	ignorePaths?: [...string]
 	postUpdateOptions?: [...string]
 	platformAutomerge: true
-	prCreation:        string | *"immediate"
+	prCreation?:       string
 }
 
 let bestPracticesBase = {
