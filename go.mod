@@ -11,7 +11,7 @@ require (
 	github.com/google/go-containerregistry v0.20.3
 	github.com/magefile/mage v1.15.0
 	github.com/rs/zerolog v1.33.0
-	github.com/spf13/cobra v1.9.0
+	github.com/spf13/cobra v1.9.1
 	github.com/spf13/viper v1.19.0
 	github.com/stretchr/testify v1.10.0
 	github.com/tidwall/pretty v1.2.1
