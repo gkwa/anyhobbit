@@ -5,7 +5,7 @@ go 1.24.0
 toolchain go1.24.6
 
 require (
-	cuelang.org/go v0.14.0
+	cuelang.org/go v0.14.1
 	github.com/fatih/color v1.18.0
 	github.com/go-git/go-git/v5 v5.16.2
 	github.com/go-logr/logr v1.4.3
