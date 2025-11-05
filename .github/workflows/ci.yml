@@ -42,7 +42,7 @@ jobs:
           make test
       - name: Run GoReleaser
         if: runner.os == 'Linux'
-        uses: goreleaser/goreleaser-action@a08664b80c0ab417b1babcbf750274aed2018fef
+        uses: goreleaser/goreleaser-action@aab47043d04e2a835021cdb1992c289f33f7f459
         with:
           args: release --snapshot --skip=publish --clean
       - name: Colored Output Test
