@@ -2,7 +2,7 @@ module github.com/gkwa/anyhobbit
 
 go 1.25.0
 
-toolchain go1.25.6
+toolchain go1.25.7
 
 require (
 	cuelang.org/go v0.15.4
