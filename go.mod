@@ -16,7 +16,7 @@ require (
 	github.com/spf13/cobra v1.10.2
 	github.com/spf13/viper v1.21.0
 	github.com/stretchr/testify v1.12.1
-	github.com/tidwall/pretty v1.2.1
+	github.com/tidwall/pretty v1.2.2
 	sigs.k8s.io/controller-runtime v0.25.1
 )
 
